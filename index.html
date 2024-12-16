@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <h1>Register a new user</h1>
+   <form action="" id="userform"></form>
+   <label for="name">Name:</label>
+   <input type="text"id="name"name="name" required><br><br>
+   <label for="email">Email:</label>
+   <input type="text"name="email" id="email" required><br><br>
+
+   <button>Submit</button>
+   </form>
+   <script>
+    // javascript to handle form submission
+    document.getElementById('userform').addEventListener('submit',async function (event)
+{event.preventDefault();
+const name = document.getElementById('name').value;
+const email = document.getElementById('email').value;
+// send a post request to the server 
+const response = await fetch('/users',{
+    method:'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({name, email})
+});
+const data = await response.json;
+console.log('New user created:',data)
+});
+   </script>
+
+</body>
+</html>
